@@ -34,4 +34,10 @@ class FoldersController extends Controller
         return redirect('/folders/index')->with('success',$folder->name.'is created');
 
     }
+
+    public function show($id)
+    {
+      $folder=Folder::with('files')->find($id);
+      return view('folders.show')->with('folder',$folder);
+    }
 }

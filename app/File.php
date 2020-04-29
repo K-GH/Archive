@@ -1,4 +1,4 @@
-  <?php
+<?php
 
 namespace App;
 use Illuminate\Database\Eloquent\Model;
@@ -7,6 +7,6 @@ class File extends Model
 {
     public function folder()
     {
-      $this->belongsTo('App\Folder');
+      return $this->belongsTo('App\Folder');
     }
 }

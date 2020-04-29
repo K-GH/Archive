@@ -20,3 +20,5 @@ Route::get('/folders/index','FoldersController@index');
 //create new folder
 Route::get('/folders/create','FoldersController@create');
 Route::post('/folders/store','FoldersController@store');
+//files of a folder
+Route::get('/folders/{id}','FoldersController@show');
