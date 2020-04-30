@@ -25,3 +25,4 @@ Route::get('/folders/{id}','FoldersController@show');
 
 //create new file
 Route::get('/files/create/{id}','FilesController@create');
+Route::post('/files/store','FilesController@store');
