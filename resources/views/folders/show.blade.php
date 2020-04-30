@@ -2,9 +2,9 @@
 @section('content')
   <h2>Files of {{$folder->name}}</h2>
   <a href="/files/create/{{$folder->id}}" class="btn btn-primary " >Upload files</a>
+  <a href="/folders/index" class="btn btn-primary  float-right">Back to Folders</a>
+  <br><br>
   @if(count($folder->files)>0)
-      <h2>Files loaded</h2>
-
         <div class="row">
             @foreach($folder->files as $file)
 

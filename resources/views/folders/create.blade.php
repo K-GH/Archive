@@ -1,12 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-  <a href="/folders/index" class="btn btn-primary">Back to Folders</a>
-  <br>
-  <br>
+  <a href="/folders/index" class="btn btn-primary  float-right">Back to Folders</a>
   <h3>Create Folder</h3>
-  <br>
-  <br>
   <div >
 
                         {!! Form::open(['action' => 'FoldersController@store','method'=>'POST']) !!}

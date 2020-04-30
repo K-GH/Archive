@@ -26,3 +26,6 @@ Route::get('/folders/{id}','FoldersController@show');
 //create new file
 Route::get('/files/create/{id}','FilesController@create');
 Route::post('/files/store','FilesController@store');
+
+//show individual file
+Route::get('/files/{id}','FilesController@show');

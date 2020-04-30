@@ -44,4 +44,10 @@ class FilesController extends Controller
       return redirect('/folders/'.$request->input('folder_id'))->with('success','File is created');
 
     }
+
+    public function show($id)
+    {
+      $file=File::find($id);
+      return view('files.show')->with('file',$file);
+    }
 }
