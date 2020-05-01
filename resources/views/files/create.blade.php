@@ -2,8 +2,6 @@
 
 @section('content')
 <h1>Create a file</h1>
-    {{$folder_id}}
-
     <div >
           {!! Form::open(['action' => 'FilesController@store','method'=>'POST','enctype'=>'multipart/form-data']) !!}
           <!--
