@@ -37,4 +37,10 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    //to replace email to username to pass it on login.blade.php
+    public function username()
+    {
+      return 'username';
+    }
 }
