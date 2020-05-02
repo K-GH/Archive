@@ -5,22 +5,32 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarColor01">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/folders/index">Upload Files</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Contact</a>
-      </li>
 
-    </ul>
 
+
+      <ul class="navbar-nav mr-auto">
+        <!--hide all of these from guest -->
+          @if(Auth::check())
+              <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/folders/index">Upload Files</a>
+              </li>
+          @endif
+          <!-- For guest only -->
+          @guest
+              <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/contact">Contact</a>
+              </li>
+          @endguest
+      </ul>
+
+
+    <!-- login & register -->
     <ul class="navbar-nav ml-auto">
         <!--  Authentication Links -->
         @guest
