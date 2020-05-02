@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/','PagesController@index');
 
+Auth::routes();
+
+//after login
+Route::get('/home', 'HomeController@index')->name('home');
+
 // redirect to Folders page
 Route::get('/folders/index','FoldersController@index');
 //create new folder
