@@ -50,7 +50,7 @@ class FilesController extends Controller
       $file->file_type=$extension;
       $file->save();
 
-      return redirect('/folders/'.$request->input('folder_id'))->with('success','File is created');
+      return redirect('/folders/'.$request->input('folder_id'))->with('success',$request->get('title').' is created');
 
     }
 

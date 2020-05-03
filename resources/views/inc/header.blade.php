@@ -12,10 +12,13 @@
         <!--hide all of these from guest -->
           @if(Auth::check())
               <li class="nav-item active">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/folders/index">Upload Files</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Dashboard</a>
               </li>
           @endif
           <!-- For guest only -->

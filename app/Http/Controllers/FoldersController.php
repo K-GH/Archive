@@ -40,7 +40,7 @@ class FoldersController extends Controller
         $folder->description=$request->input('description');
         $folder->save();
 
-        return redirect('/folders/index')->with('success',$folder->name.'is created');
+        return redirect('/folders/index')->with('success',$folder->name.' is created');
 
     }
 

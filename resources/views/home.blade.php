@@ -1,32 +1,36 @@
 @extends('layouts.app')
 
 @section('content')
-<!--
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+
+
+                  <div class="row justify-content-center">
+                        <br>
+                        <div class="col-md-5">
+
+                            <div class="card border-success mb-3" style="max-width: 30rem;">
+                                <div class="card-header">Welcome Back <strong> {{Auth::user()->name}}</strong> </div>
+
+                                <div class="card-body">
+                                    @if (session('status'))
+                                        <div class="card-text" role="alert">
+                                            {{ session('status') }}
+                                        </div>
+                                    @endif
+
+                                    You are logged in!
+                                    <br>
+                                    Last login at : {{Auth::user()->last_login_at}}
+                                    <br>
+                                    Last login IP:   {{Auth::user()->last_login_ip}}
+                                </div>
+                            </div>
                         </div>
-                    @endif
 
-                    You are logged in!
-                </div>
-            </div>
-        </div>
-    </div>
-</div>-->
-<br>
-<h3>Home Page</h3>
-<br>
-
-<div class="row justify-content-center">
                         <div class="col-12 col-md-10 col-lg-8">
+                          <br>
+                          <br>
+                          <br>
                             <form class="card card-sm">
                                 <div class="card-body row no-gutters align-items-center">
                                     <div class="col-auto">

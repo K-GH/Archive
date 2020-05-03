@@ -1,7 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-  <h3>Your Folders</h3>
+
+  <div class="text-center">
+            <h2>Your Folders</h2>
+  </div>
   <a href="/folders/create" class="btn btn-primary  float-right " >Create a new folder</a>
     <br>
     <br>

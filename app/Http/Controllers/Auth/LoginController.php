@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+//to used in authenticated() 
+use Illuminate\Http\Request;
+use Carbon\Carbon;
+
 class LoginController extends Controller
 {
     /*
@@ -43,4 +47,13 @@ class LoginController extends Controller
     {
       return 'username';
     }
+
+    //override  authenticated() method in the AuthenticatesUsers trait,It’s called every time someone logs in.
+    function authenticated(Request $request, $user)
+      {
+          $user->update([
+              'last_login_at' => Carbon::now()->toDateTimeString(),
+              'last_login_ip' => $request->getClientIp()
+          ]);
+      }
 }
