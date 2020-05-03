@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Folder;
+use Illuminate\Support\Facades\Auth;
 
 class FoldersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index()
     {
@@ -26,7 +31,11 @@ class FoldersController extends Controller
           'description'=>'required'
         ]);
 
+        //get user id from Auth
+        $user_id=Auth::id();
+
         $folder=new Folder();
+        $folder->user_id=$user_id;
         $folder->name=$request->input('name');
         $folder->description=$request->input('description');
         $folder->save();

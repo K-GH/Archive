@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\File;
+use Illuminate\Support\Facades\Auth;
 
 class FilesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function create($folder_id)
     {
       return view('files.create')->with('folder_id',$folder_id);
@@ -20,6 +27,8 @@ class FilesController extends Controller
         'file'=>'required'
       ]);
 
+      //get user id from Auth
+      $user_id=Auth::id();
 
       $fileName=$request->get('title');
       //get extension only
@@ -28,8 +37,8 @@ class FilesController extends Controller
       //replace original file name to title +time()+ extension
       $fileNameToStore=$fileName.'_'.time().'.'.$extension;
 
-      //upload File to public folder on storage folder and create  new Folder and subfolder(folder_id)  with new  uniqe fromat
-      $path=$request->file('file')->storeAs('public/Folder/'.$request->input('folder_id'),$fileNameToStore);
+      //upload File to public folder on storage folder and create  new Folder(user_id) and subfolder(folder_id)  with new  uniqe fromat
+      $path=$request->file('file')->storeAs('public/'.$user_id.'/'.$request->input('folder_id'),$fileNameToStore);
 
       //store on DB
       $file=new File();
