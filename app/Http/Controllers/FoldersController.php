@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Folder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class FoldersController extends Controller
 {
@@ -15,7 +16,9 @@ class FoldersController extends Controller
 
     public function index()
     {
-      $folders=Folder::all();
+      //get user id from Auth
+      $user_id=Auth::id();
+      $folders= DB::table('folders')->where('user_id', $user_id)->get();
       return view('folders.index')->with('folders',$folders);
     }
 
@@ -46,7 +49,16 @@ class FoldersController extends Controller
 
     public function show($id)
     {
-      $folder=Folder::with('files')->find($id);
-      return view('folders.show')->with('folder',$folder);
+
+      $user_id=Auth::id();
+      $folder=Folder::with('files')->where('user_id', $user_id)->find($id);
+
+      if($folder)
+      {
+          return view('folders.show')->with('folder',$folder);
+      }else{
+          return redirect('/')->with('error','You do not have allow to access this');
+      }
+
     }
 }
