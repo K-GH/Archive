@@ -36,3 +36,6 @@ Route::post('/files/store','FilesController@store');
 
 //show individual file
 Route::get('/files/{id}','FilesController@show');
+
+//search out side folders and files
+Route::post('/home','SearchOutController@find');

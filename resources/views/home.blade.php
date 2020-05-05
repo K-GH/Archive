@@ -31,22 +31,33 @@
                           <br>
                           <br>
                           <br>
-                            <form class="card card-sm">
-                                <div class="card-body row no-gutters align-items-center">
-                                    <div class="col-auto">
-                                        <i class="fas fa-search h4 text-body"></i>
+
+                            {!! Form::open(['action' => 'SearchOutController@find','method'=>'POST' ,"class"=>"card card-sm"]) !!}
+                                    @csrf
+                                    <!--
+                                    //tb3n 2bl ay 7ga lazm a3ml update composer 3lshan yanzl laravel collective (html)=>Form
+                                    //bdef kam line fil config=>app.php ( providers , alies)
+                                    //kol 7aga mn dol bro7 a3del fil FormServiceProvider w b3d kda bcreate file fil view=>component=>Form=>filename bnfs alname 3lshan bs 2adr 2ast5dma hena
+                                    -->
+                                    <div class="card-body row no-gutters align-items-center">
+                                        <div class="col-auto">
+                                            <i class="fas fa-search h4 text-body"></i>
+                                        </div>
+                                        <!--end of col-->
+                                        <div class="col">
+                                           {{ Form::Text('key','',['placeholder'=>'Search topics or keywords' ,'class'=>'form-control form-control-lg form-control-borderless'  ]) }}
+                                        </div>
+                                        <!--end of col-->
+                                        <div class="col-auto">
+
+                                          {{ Form::Submit('Search',['class'=>'btn btn-lg btn-success']) }}
+                                        </div>
+                                        <!--end of col-->
                                     </div>
-                                    <!--end of col-->
-                                    <div class="col">
-                                        <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Search topics or keywords">
-                                    </div>
-                                    <!--end of col-->
-                                    <div class="col-auto">
-                                        <button class="btn btn-lg btn-success" type="submit">Search</button>
-                                    </div>
-                                    <!--end of col-->
-                                </div>
-                            </form>
+
+
+                            {!! Form::close() !!}
+                            @include('inc.resultsearch')
                         </div>
                         <!--end of col-->
                     </div>
