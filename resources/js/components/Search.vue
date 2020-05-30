@@ -6,23 +6,38 @@
             </div>
 
             <div class="col">
-              <input type="text" class="form-control form-control-lg form-control-borderless" name="" value="" placeholder="Search topics or keywords">
+              <input type="text" class="form-control form-control-lg form-control-borderless"  placeholder="Search topics or keywords" v-model="key">
 
             </div>
 
             <div class="col-auto">
-              <input type="submit" class="btn btn-lg btn-success" name="" value="search">
-
+              <input type="submit" class="btn btn-lg btn-success"  value="search" @click="search">
             </div>
 
+            <br>
+
+
         </div>
+        <div class="alert alert-dismissible alert-success"><pre>{{message}}</pre></div>
     </div>
 </template>
 
 <script>
     export default {
+        data(){
+          return {
+            key: '',
+            message: ''
+          };
+        },
         mounted() {
             console.log('Component mounted.')
+        },
+        methods:{
+          search(){
+            this.message=this.key;
+          },
+
         }
     }
 </script>

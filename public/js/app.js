@@ -1929,9 +1929,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      key: '',
+      message: ''
+    };
+  },
   mounted: function mounted() {
     console.log('Component mounted.');
+  },
+  methods: {
+    search: function search() {
+      this.message = this.key;
+    }
   }
 });
 
@@ -37581,43 +37595,57 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "card-body row no-gutters align-items-center" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "col" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.key,
+              expression: "key"
+            }
+          ],
+          staticClass: "form-control form-control-lg form-control-borderless",
+          attrs: { type: "text", placeholder: "Search topics or keywords" },
+          domProps: { value: _vm.key },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.key = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-auto" }, [
+        _c("input", {
+          staticClass: "btn btn-lg btn-success",
+          attrs: { type: "submit", value: "search" },
+          on: { click: _vm.search }
+        })
+      ]),
+      _vm._v(" "),
+      _c("br")
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "alert alert-dismissible alert-success" }, [
+      _c("pre", [_vm._v(_vm._s(_vm.message))])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c(
-        "div",
-        { staticClass: "card-body row no-gutters align-items-center" },
-        [
-          _c("div", { staticClass: "col-auto" }, [
-            _c("i", { staticClass: "fas fa-search h4 text-body" })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col" }, [
-            _c("input", {
-              staticClass:
-                "form-control form-control-lg form-control-borderless",
-              attrs: {
-                type: "text",
-                name: "",
-                value: "",
-                placeholder: "Search topics or keywords"
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-auto" }, [
-            _c("input", {
-              staticClass: "btn btn-lg btn-success",
-              attrs: { type: "submit", name: "", value: "search" }
-            })
-          ])
-        ]
-      )
+    return _c("div", { staticClass: "col-auto" }, [
+      _c("i", { staticClass: "fas fa-search h4 text-body" })
     ])
   }
 ]
