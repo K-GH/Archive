@@ -10,18 +10,27 @@ use Illuminate\Support\Facades\Auth;
 
 class SearchOutController extends Controller
 {
-      public function find(Request $request)
+      public function find($key)
       {
-          $this->validate($request,[
-            'key'=>'required',
-          ]);
 
-          $user_id=Auth::id();
-          $key=$request->get('key');
-          $found=Folder::where('name',$key)->get();
+            $user_id=Auth::id();
+            //$twoCondition=['name'=>$key ,'user_id'=>$user_id];
+            //return Folder::where($twoCondition)->get();
+            //return Folder::where('name',$key)->get();
+
+
+          //$found=Folder::where('name',$key)->get();
+          $found=Folder::select('*')
+                        ->where('name','like','%'.$key.'%')
+                        ->get();
+
+
+
+          //return Phonebook::where('name', 'like', '%'.$request->SearchQuery.'%')->orWhere('email', 'like', '%'.$request->SearchQuery.'%')->orWhere('phone', 'like', '%'.$request->SearchQuery.'%')->get();
+
           if($found)
           {
-             return redirect('/home')->with('found',$found);
+             return $found;
           }else{
               return redirect('/home')->with('error','not found');
           }

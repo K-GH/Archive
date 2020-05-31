@@ -38,4 +38,4 @@ Route::post('/files/store','FilesController@store');
 Route::get('/files/{id}','FilesController@show');
 
 //search out side folders and files
-Route::post('/home','SearchOutController@find');
+//Route::post('/home','SearchOutController@find');

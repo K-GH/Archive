@@ -1932,10 +1932,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       key: '',
+
+      /*
+      results:{
+        id:'',
+        name:'',
+        description:'',
+       },*/
+      results: {},
       message: ''
     };
   },
@@ -1943,8 +1958,24 @@ __webpack_require__.r(__webpack_exports__);
     console.log('Component mounted.');
   },
   methods: {
-    search: function search() {
-      this.message = this.key;
+    /*  search(){
+        //this.message=this.key;
+        this.showResult(this.key);
+        this.message=name;
+      },*/
+    getResult: function getResult(key) {
+      var self = this;
+      axios.get('api/search/' + key).then(function (response) {
+        console.log(response.data);
+        self.results = response.data; //console.log(response.data.id);
+
+        /*self.results.name=response.data[0].name;
+        self.results.id=response.data[0].id;
+        self.results.description=response.data[0].description;*/
+        //console.log(self.results.id);
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   }
 });
@@ -37595,49 +37626,93 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "card-body row no-gutters align-items-center" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("div", { staticClass: "col" }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.key,
-              expression: "key"
-            }
-          ],
-          staticClass: "form-control form-control-lg form-control-borderless",
-          attrs: { type: "text", placeholder: "Search topics or keywords" },
-          domProps: { value: _vm.key },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      _c(
+        "div",
+        { staticClass: "card-body row no-gutters align-items-center" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.key,
+                  expression: "key"
+                }
+              ],
+              staticClass:
+                "form-control form-control-lg form-control-borderless",
+              attrs: { type: "text", placeholder: "Search topics or keywords" },
+              domProps: { value: _vm.key },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.key = $event.target.value
+                }
               }
-              _vm.key = $event.target.value
-            }
-          }
-        })
-      ]),
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-auto" }, [
+            _c("input", {
+              staticClass: "btn btn-lg btn-success",
+              attrs: { type: "submit", value: "search" },
+              on: {
+                click: function($event) {
+                  return _vm.getResult(_vm.key)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("br")
+        ]
+      ),
       _vm._v(" "),
-      _c("div", { staticClass: "col-auto" }, [
-        _c("input", {
-          staticClass: "btn btn-lg btn-success",
-          attrs: { type: "submit", value: "search" },
-          on: { click: _vm.search }
-        })
-      ]),
-      _vm._v(" "),
-      _c("br")
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "alert alert-dismissible alert-success" }, [
-      _c("pre", [_vm._v(_vm._s(_vm.message))])
-    ])
-  ])
+      _vm._l(_vm.results, function(result) {
+        return _c(
+          "div",
+          {
+            key: result.id,
+            staticClass: "alert alert-dismissible alert-success"
+          },
+          [
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: result.id,
+                    expression: "result.id"
+                  }
+                ]
+              },
+              [
+                _c("pre", [
+                  _c("a", { attrs: { href: "/folders/" + result.id } }, [
+                    _vm._v(" Click here : " + _vm._s(result.name))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("p", [_vm._v(" " + _vm._s(result.description) + " ")])
+              ]
+            )
+          ]
+        )
+      })
+    ],
+    2
+  )
 }
 var staticRenderFns = [
   function() {
