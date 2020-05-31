@@ -57,7 +57,7 @@ class FoldersController extends Controller
       {
           return view('folders.show')->with('folder',$folder);
       }else{
-          return redirect('/')->with('error','You do not have allow to access this');
+          return redirect('/home')->with('error','You do not have allow to access this');
       }
 
     }

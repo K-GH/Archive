@@ -6,7 +6,7 @@
             </div>
 
             <div class="col">
-              <input type="text" class="form-control form-control-lg form-control-borderless"  placeholder="Search topics or keywords" v-model="key">
+              <input type="text" class="form-control form-control-lg form-control-borderless"  placeholder="Search topics or keywords" v-model="key" @input="typing(key)">
 
             </div>
 
@@ -18,12 +18,17 @@
 
 
         </div>
-
+        <div v-if="!found" class="alert alert-dismissible alert-success" >
+              <p>No results</p>
+              <p>{{message}}</p>
+        </div>
           <div class="alert alert-dismissible alert-success"   v-for="result in results" :key="result.id">
+
             <div v-show="result.id">
             <pre><a v-bind:href="'/folders/'+ result.id"> Click here : {{result.name}}</a></pre>
             <p> {{result.description}} </p>
           </div>
+
         </div>
 
     </div>
@@ -42,20 +47,16 @@
 
             },*/
             results:{},
+            found:false,
             message: ''
           };
         },
         mounted() {
             console.log('Component mounted.')
 
-
         },
+
         methods:{
-        /*  search(){
-            //this.message=this.key;
-            this.showResult(this.key);
-            this.message=name;
-          },*/
           getResult: function(key){
            let self=this;
            axios.get('api/search/'+key)
@@ -67,8 +68,33 @@
                   self.results.id=response.data[0].id;
                   self.results.description=response.data[0].description;*/
                   //console.log(self.results.id);
+                  console.log(self.results.length);
+                  if (self.results.length === 0) {
+                    //console.log('yes is  equal zero')
+                    self.found=false;
+                    self.message="folder not found. Check your enter ( "+self.key+" ) and try again.";
+                  }else {
+                      self.found=true;
+                  }
 
+              }).catch((error)=>{
+                    console.log(error);
+                })
 
+         },
+        typing: function(key){
+           let self=this;
+           axios.get('api/search/'+key)
+              .then(function(response){
+                  console.log(response.data);
+                  self.results=response.data;
+                  if (self.results.length === 0) {
+                    //console.log('yes is  equal zero')
+                    self.found=false;
+                    self.message="folder not found. Check your enter ( "+self.key+" ) and try again.";
+                  }else {
+                      self.found=true;
+                  }
               }).catch((error)=>{
                     console.log(error);
                 })

@@ -1939,6 +1939,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1951,6 +1956,7 @@ __webpack_require__.r(__webpack_exports__);
         description:'',
        },*/
       results: {},
+      found: false,
       message: ''
     };
   },
@@ -1958,11 +1964,6 @@ __webpack_require__.r(__webpack_exports__);
     console.log('Component mounted.');
   },
   methods: {
-    /*  search(){
-        //this.message=this.key;
-        this.showResult(this.key);
-        this.message=name;
-      },*/
     getResult: function getResult(key) {
       var self = this;
       axios.get('api/search/' + key).then(function (response) {
@@ -1973,6 +1974,33 @@ __webpack_require__.r(__webpack_exports__);
         self.results.id=response.data[0].id;
         self.results.description=response.data[0].description;*/
         //console.log(self.results.id);
+
+        console.log(self.results.length);
+
+        if (self.results.length === 0) {
+          //console.log('yes is  equal zero')
+          self.found = false;
+          self.message = "folder not found. Check your enter ( " + self.key + " ) and try again.";
+        } else {
+          self.found = true;
+        }
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    typing: function typing(key) {
+      var self = this;
+      axios.get('api/search/' + key).then(function (response) {
+        console.log(response.data);
+        self.results = response.data;
+
+        if (self.results.length === 0) {
+          //console.log('yes is  equal zero')
+          self.found = false;
+          self.message = "folder not found. Check your enter ( " + self.key + " ) and try again.";
+        } else {
+          self.found = true;
+        }
       })["catch"](function (error) {
         console.log(error);
       });
@@ -37651,12 +37679,17 @@ var render = function() {
               attrs: { type: "text", placeholder: "Search topics or keywords" },
               domProps: { value: _vm.key },
               on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+                input: [
+                  function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.key = $event.target.value
+                  },
+                  function($event) {
+                    return _vm.typing(_vm.key)
                   }
-                  _vm.key = $event.target.value
-                }
+                ]
               }
             })
           ]),
@@ -37676,6 +37709,14 @@ var render = function() {
           _c("br")
         ]
       ),
+      _vm._v(" "),
+      !_vm.found
+        ? _c("div", { staticClass: "alert alert-dismissible alert-success" }, [
+            _c("p", [_vm._v("No results")]),
+            _vm._v(" "),
+            _c("p", [_vm._v(_vm._s(_vm.message))])
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _vm._l(_vm.results, function(result) {
         return _c(
