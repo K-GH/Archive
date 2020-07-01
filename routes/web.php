@@ -2,40 +2,35 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
-Route::get('/','PagesController@index');
-Route::get('/about','PagesController@about');
-Route::get('/contact','PagesController@contact');
+Route::group(['prefix' => LaravelLocalization::setLocale()], function()
+{
+	/** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
 
-Auth::routes();
+  Route::get('/','PagesController@index');
+  Route::get('/about','PagesController@about');
+  Route::get('/contact','PagesController@contact');
 
-//after login
-Route::get('/home', 'HomeController@index')->name('home');
+  Auth::routes();
 
-// redirect to Folders page
-Route::get('/folders/index','FoldersController@index');
-//create new folder
-Route::get('/folders/create','FoldersController@create');
-Route::post('/folders/store','FoldersController@store');
-//files of a folder
-Route::get('/folders/{id}','FoldersController@show');
+  //after login
+  Route::get('/home', 'HomeController@index')->name('home');
 
-//create new file
-Route::get('/files/create/{id}','FilesController@create');
-Route::post('/files/store','FilesController@store');
+  // redirect to Folders page
+  Route::get('/folders/index','FoldersController@index');
+  //create new folder
+  Route::get('/folders/create','FoldersController@create');
+  Route::post('/folders/store','FoldersController@store')->name('store');
+  //files of a folder
+  Route::get('/folders/{id}','FoldersController@show');
 
-//show individual file
-Route::get('/files/{id}','FilesController@show');
+  //create new file
+  Route::get('/files/create/{id}','FilesController@create');
+  Route::post('/files/store','FilesController@store')->name('store');
 
-//search out side folders and files
-//Route::post('/home','SearchOutController@find');
+  //show individual file
+  Route::get('/files/{id}','FilesController@show');
+
+  //search out side folders and files
+  //Route::post('/home','SearchOutController@find');
+});

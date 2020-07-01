@@ -37676,7 +37676,10 @@ var render = function() {
               ],
               staticClass:
                 "form-control form-control-lg form-control-borderless",
-              attrs: { type: "text", placeholder: "Search topics or keywords" },
+              attrs: {
+                type: "text",
+                placeholder: "@lang('site.search_topics_or_keywords')"
+              },
               domProps: { value: _vm.key },
               on: {
                 input: [

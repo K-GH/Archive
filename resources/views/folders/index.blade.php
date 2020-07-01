@@ -3,9 +3,9 @@
 @section('content')
 
   <div class="text-center">
-            <h2>Your Folders</h2>
+            <h2>@lang('site.your_folders')</h2>
   </div>
-  <a href="/folders/create" class="btn btn-primary  float-right " >Create a new folder</a>
+  <a href="/folders/create" class="btn btn-primary  float-right " >@lang('site.create_folder')</a>
     <br>
     <br>
         <div class="row">

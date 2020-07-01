@@ -3,8 +3,8 @@
   <div class="text-center">
           <h2>Files of {{$folder->name}}</h2>
   </div>
-  <a href="/files/create/{{$folder->id}}" class="btn btn-primary " >Upload files</a>
-  <a href="/folders/index" class="btn btn-primary  float-right">Back to Folders</a>
+  <a href="/files/create/{{$folder->id}}" class="btn btn-primary " >@lang('site.upload_files')</a>
+  <a href="/folders/index" class="btn btn-primary  float-right">@lang('site.Back')</a>
   <br><br>
   @if(count($folder->files)>0)
         <div class="row">

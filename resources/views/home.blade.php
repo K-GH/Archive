@@ -4,26 +4,52 @@
 
 
 
-                  <div class="row justify-content-center">
+                  <div class="row justify-content-center ">
                         <br>
                         <div class="col-md-5">
 
-                            <div class="card border-success mb-3" style="max-width: 30rem;">
-                                <div class="card-header">Welcome Back <strong> {{Auth::user()->name}}</strong> </div>
-
-                                <div class="card-body">
-                                    @if (session('status'))
-                                        <div class="card-text" role="alert">
-                                            {{ session('status') }}
+                            <div class="card border-success mb-3 " style="max-width: 30rem;">
+                                <div class="card-header d-flex justify-content-center">@lang('site.welcome_back')   <strong>{{Auth::user()->name}}</strong> </div>
+                                <!-- switch languages to switch  mr-auto or ml-auto -->
+                                  @if (app()->getLocale() == 'ar')
+                                  <div class="card-body">
+                                        @if (session('status'))
+                                            <div class="card-text " role="alert">
+                                                {{ session('status') }}
+                                            </div>
+                                        @endif
+                                        <div class="d-flex justify-content-right" >
+                                            @lang('site.you_are_logged_in')!
                                         </div>
-                                    @endif
-
-                                    You are logged in!
-                                    <br>
-                                    Last login at : {{Auth::user()->last_login_at}}
-                                    <br>
-                                    Last login IP:   {{Auth::user()->last_login_ip}}
-                                </div>
+                                        <br>
+                                        <div class="d-flex justify-content-right">
+                                            @lang('site.last_login_at') : {{Auth::user()->last_login_at}}
+                                        </div>
+                                        <br>
+                                        <div class="d-flex justify-content-right" >
+                                          @lang('site.last_login_ip') :   {{Auth::user()->last_login_ip}}
+                                        </div>
+                                  </div>
+                                  @else
+                                  <div class="card-body">
+                                        @if (session('status'))
+                                            <div class="card-text " role="alert">
+                                                {{ session('status') }}
+                                            </div>
+                                        @endif
+                                        <div class="d-flex justify-content-left" >
+                                            @lang('site.you_are_logged_in')!
+                                        </div>
+                                        <br>
+                                        <div class="d-flex justify-content-left">
+                                            @lang('site.last_login_at') : {{Auth::user()->last_login_at}}
+                                        </div>
+                                        <br>
+                                        <div class="d-flex justify-content-left" >
+                                          @lang('site.last_login_ip') :   {{Auth::user()->last_login_ip}}
+                                        </div>
+                                  </div>
+                                  @endif
                             </div>
                         </div>
 

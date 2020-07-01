@@ -6,7 +6,7 @@
             </div>
 
             <div class="col">
-              <input type="text" class="form-control form-control-lg form-control-borderless"  placeholder="Search topics or keywords" v-model="key" @input="typing(key)">
+              <input type="text" class="form-control form-control-lg form-control-borderless"  placeholder="@lang('site.search_topics_or_keywords')" v-model="key" @input="typing(key)">
 
             </div>
 
